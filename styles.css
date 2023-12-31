@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 30%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main {
+    width: 70%;
+    height: 100vh;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    gap: 36px;
+    max-width: 1000px;
+    max-height: calc(100vh - 10%);
+    overflow: hidden;
+}
+
+.card {
+    background-color: antiquewhite;
+    padding: 36px;
+    border-radius: 10px;
+}
