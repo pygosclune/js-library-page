@@ -10,50 +10,56 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">  
         <script src="https://kit.fontawesome.com/6faef4fc76.js" crossorigin="anonymous"></script>
-        <script src="./script.js"></script> 
     </head>
     <body>
-        <div class="container">
-            <div class="sidebar">
-                <form class="book-form" id="bookForm">
-                    <h3>Add new book</h3>
-                    <input
-                      class="input"
-                      type="text"
-                      id="title"
-                      placeholder="Title"
-                      required
-                      maxlength="100"
-                    />
-                    <p class="error-msg" id="errorMsg"></p>
-                    <input
-                      class="input"
-                      type="text"
-                      id="author"
-                      placeholder="Author"
-                      required
-                      maxlength="100"
-                    />
-                    <input
-                      class="input"
-                      type="number"
-                      id="pages"
-                      placeholder="Pages"
-                      required
-                      max="10000"
-                    />
-                    <div class="is-read">
-                      <label for="is-read">Have you read it?</label>
-                      <input class="checkbox" type="checkbox" id="isRead" />
-                    </div>
-                    <button class="submit" type="submit">Submit</button>
-                  </form>
+        <header class="main-header">
+            <h3>Pygosclune 2023</h3>
+            <h2>Library</h2>
+            <button id="show-modal" onclick="switchModal()">Add book</button>
+        </header>
+        <main>
+            <h2>Your books:</h2>
+            <div class="cards">
             </div>
+        </main>
 
-            <div class="main">
-                <div class="cards">
+        <div class="modal" id="add-book">
+            <div class="modal-content">
+            <header class="modal-header">
+                <h3>Add new book</h3>
+                <i class="fa-solid fa-xmark close" onclick="switchModal()" style="cursor: pointer; font-size: 2rem;"></i>
+            </header>
+            <form class="book-form" id="bookForm" onsubmit="switchModal()">
+                <input
+                type="text"
+                id="title"
+                placeholder="Title"
+                required
+                maxlength="100"
+                />
+                <p class="error-msg" id="errorMsg"></p>
+                <input
+                type="text"
+                id="author"
+                placeholder="Author"
+                required
+                maxlength="100"
+                />
+                <input
+                type="number"
+                id="pages"
+                placeholder="Pages"
+                required
+                max="10000"
+                />
+                <div class="is-read">
+                <label for="is-read">Have you read it?</label>
+                <input class="checkbox" type="checkbox" id="isRead" />
                 </div>
+                <button class="submit" type="submit">Add book</button>
+            </form>
             </div>
         </div>
+        <script src="./script.js"></script> 
     </body>
 </html>

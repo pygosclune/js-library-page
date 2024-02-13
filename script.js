@@ -1,8 +1,39 @@
+const modal = document.getElementById("add-book");
+const switchButton = document.getElementById("show-modal");
+let modalSwitch = false;
+
+function switchModal() {
+    modalSwitch = !modalSwitch;
+    if (modalSwitch) {
+        modal.style.display = 'flex';
+    } else {
+        modal.style.display = 'none';
+    }
+}
+
 const myLibrary = [];
 let bookIndex = 0;
 
 function updateBooks(book) {
     const cardsContainer = document.querySelector(".cards");
+
+    const buttonsDiv = document.createElement("div");
+    buttonsDiv.className = "card-buttons";
+    const isReadCheckbox = document.createElement("input");
+    isReadCheckbox.type = "checkbox";
+    isReadCheckbox.className = "larger";
+    isReadCheckbox.checked = book.isRead;
+    isReadCheckbox.addEventListener("click", function () {
+        book.isRead = isReadCheckbox.checked;
+    });
+
+    const deleteButton = document.createElement("i");
+    deleteButton.className = "fa-solid fa-trash delete-icon";
+    deleteButton.addEventListener("click", function () {
+        const index = parseInt(bookDiv.getAttribute("data-id"), 10);
+        myLibrary.splice(index, 1);
+        bookDiv.remove();
+    });
 
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("card");
@@ -14,26 +45,12 @@ function updateBooks(book) {
     const pagesString = document.createElement("p");
     pagesString.textContent = book.pages;
 
-    const isReadCheckbox = document.createElement("input");
-    isReadCheckbox.type = "checkbox";
-    isReadCheckbox.checked = book.isRead;
-    isReadCheckbox.addEventListener("click", function () {
-        book.isRead = isReadCheckbox.checked;
-    });
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", function () {
-        const index = parseInt(bookDiv.getAttribute("data-id"), 10);
-        myLibrary.splice(index, 1);
-        bookDiv.remove();
-    });
-
+    buttonsDiv.appendChild(isReadCheckbox);
+    buttonsDiv.appendChild(deleteButton);
+    bookDiv.appendChild(buttonsDiv);
     bookDiv.appendChild(titleString);
     bookDiv.appendChild(authorString);
     bookDiv.appendChild(pagesString);
-    bookDiv.appendChild(isReadCheckbox);
-    bookDiv.appendChild(deleteButton);
     cardsContainer.appendChild(bookDiv);
 }
 
