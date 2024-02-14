@@ -67,7 +67,7 @@ input.larger {
 
 /* book cards */
 main {
-    width: 90%;
+    width: 60%;
     border-radius: 10px;
     align-self: center;
     margin-top: 5rem;
@@ -78,17 +78,19 @@ main {
 }
 
 .cards {
-    display: flex;
+    align-self: center;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
     margin-top: 2rem;
 }
 
 .card {
     background-color: #DDFBD2;
     padding: 1rem;
-    min-width: 150px;
     border-radius: 10px;
     color: black;
-    border: 1px solid black;
+    border: 2px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -105,6 +107,17 @@ main {
 .delete-icon {
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.book-content {
+    height: 80%;
+}
+.book-title, .book-author, .book-pages {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    max-width: 100px;
 }
 
 /* modal */

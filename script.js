@@ -1,5 +1,6 @@
 const modal = document.getElementById("add-book");
 const switchButton = document.getElementById("show-modal");
+const noBooksError = document.getElementById("no-books-error");
 let modalSwitch = false;
 
 function switchModal() {
@@ -14,7 +15,18 @@ function switchModal() {
 const myLibrary = [];
 let bookIndex = 0;
 
+function updateDataIds() {
+    const bookDivs = document.querySelectorAll('.card');
+    let counter = 0;
+    bookDivs.forEach((div, index) => {
+        div.setAttribute("data-id", index);
+        counter++;
+    });
+    bookIndex = counter;
+}
+
 function updateBooks(book) {
+    if (myLibrary.length > 0) noBooksError.style.display = "none";
     const cardsContainer = document.querySelector(".cards");
 
     const buttonsDiv = document.createElement("div");
@@ -33,6 +45,8 @@ function updateBooks(book) {
         const index = parseInt(bookDiv.getAttribute("data-id"), 10);
         myLibrary.splice(index, 1);
         bookDiv.remove();
+        updateDataIds();
+        if (myLibrary.length === 0) noBooksError.style.display = "block";
     });
 
     const bookDiv = document.createElement("div");
@@ -40,17 +54,26 @@ function updateBooks(book) {
     bookDiv.setAttribute("data-id", bookIndex);
     const titleString = document.createElement("h3");
     titleString.textContent = book.title;
+    titleString.className = "book-title";
     const authorString = document.createElement("h4");
     authorString.textContent = book.author;
+    authorString.className = "book-author";
     const pagesString = document.createElement("p");
     pagesString.textContent = book.pages;
+    pagesString.className = "book-pages"
 
     buttonsDiv.appendChild(isReadCheckbox);
     buttonsDiv.appendChild(deleteButton);
+
+    const contentDiv = document.createElement("div");
+    contentDiv.className = "book-content";
+
+    contentDiv.appendChild(titleString);
+    contentDiv.appendChild(authorString);
+    contentDiv.appendChild(pagesString);
+
     bookDiv.appendChild(buttonsDiv);
-    bookDiv.appendChild(titleString);
-    bookDiv.appendChild(authorString);
-    bookDiv.appendChild(pagesString);
+    bookDiv.appendChild(contentDiv);
     cardsContainer.appendChild(bookDiv);
 }
 
@@ -66,14 +89,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     form.addEventListener("submit", function(event) {
         event.preventDefault();
-        let title = document.getElementById("title").value;
-        let author = document.getElementById("author").value;
-        let pages = document.getElementById("pages").value;
-        let isRead = document.getElementById("isRead").checked;
+        const title = document.getElementById("title").value;
+        const author = document.getElementById("author").value;
+        const pages = document.getElementById("pages").value;
+        const isRead = document.getElementById("isRead").checked;
 
-        let newBook = new Book(title, author, pages, isRead);
+        const newBook = new Book(title, author, pages, isRead);
         myLibrary.push(newBook);
-        console.log(myLibrary); // DEBUG
         updateBooks(newBook);
         bookIndex++;
         form.reset();
