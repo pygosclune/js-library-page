@@ -12,8 +12,12 @@ function switchModal() {
     }
 }
 
-const myLibrary = [];
+let myLibrary = [];
 let bookIndex = 0;
+
+function populateLibrary(data) {
+    localStorage.setItem("myLibrary", JSON.stringify(data));
+}
 
 function updateDataIds() {
     const bookDivs = document.querySelectorAll('.card');
@@ -46,6 +50,7 @@ function updateBooks(book) {
         myLibrary.splice(index, 1);
         bookDiv.remove();
         updateDataIds();
+        populateLibrary(myLibrary);
         if (myLibrary.length === 0) noBooksError.style.display = "block";
     });
 
@@ -98,6 +103,15 @@ document.addEventListener("DOMContentLoaded", function() {
         myLibrary.push(newBook);
         updateBooks(newBook);
         bookIndex++;
+        populateLibrary(myLibrary);
         form.reset();
     });
+
+    if (localStorage.getItem("myLibrary")) {
+        const storedLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+        myLibrary = storedLibrary;
+        storedLibrary.map(book => {
+            updateBooks(book);
+        });
+    }
 });

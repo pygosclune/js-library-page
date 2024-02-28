@@ -80,9 +80,15 @@ main {
 .cards {
     align-self: center;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 .card {
@@ -95,6 +101,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 150px;
 }
 
 .card-buttons {
