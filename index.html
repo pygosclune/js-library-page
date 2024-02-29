@@ -31,6 +31,7 @@
                 <i class="fa-solid fa-xmark close" onclick="switchModal()" style="cursor: pointer; font-size: 2rem;"></i>
             </header>
             <form class="book-form" id="bookForm" onsubmit="switchModal()">
+                <p class="error-msg" id="errorMsg"></p>
                 <input
                 type="text"
                 id="title"
@@ -38,7 +39,6 @@
                 required
                 maxlength="100"
                 />
-                <p class="error-msg" id="errorMsg"></p>
                 <input
                 type="text"
                 id="author"
@@ -54,10 +54,17 @@
                 max="10000"
                 />
                 <div class="is-read">
-                <label for="isRead">Have you read it?</label>
-                <input class="checkbox" type="checkbox" id="isRead" />
+                    <label for="isRead">Have you read it?</label>
+                    <input class="checkbox larger" type="checkbox" id="isRead" />
                 </div>
-                <button class="submit" type="submit">Add book</button>
+                <button class="submit button" type="submit">
+                    <span class="button__text">Add book</span>
+                    <span class="button__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" 
+                        stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line>
+                        <line y2="12" y1="12" x2="19" x1="5"></line></svg>
+                    </span>
+                </button>
             </form>
             </div>
         </div>
