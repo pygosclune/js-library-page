@@ -1,4 +1,4 @@
 # js-library
 
 
-really simple html/css/js site to practice javascript
+Your simple browser library to store your books
